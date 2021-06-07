@@ -17,7 +17,6 @@ def UsuarioService():
     data = cur.fetchall()
     mysql.connection.commit()
     cur.close()
-    print(data)
     return render_template('UsuarioService.html', data=data)
 
 
