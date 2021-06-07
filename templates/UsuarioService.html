@@ -1,8 +1,9 @@
 {% extends 'layout.html' %} {% block content %}
+<br>
 <div class="row mar">
-    <h1>Bienvenido!!!</h1>
     <div class="explanation">
-        <h2>¡Selecciona el Twitter de quien quieres ver!</h2>
+      <h1>Bienvenido!!!</h1>
+      <h2>¡Selecciona el Twitter de quien quieres ver!</h2>
     </div>
 </div>
 
@@ -16,6 +17,8 @@
               <option>{{item[0]}}</option>
             {% endfor %}
           </select>
+          <br>
+          <a name="" id="" class="btn btn-secondary" type="submit" role="button">Enviar</a>
         </div>
     
       </form>
