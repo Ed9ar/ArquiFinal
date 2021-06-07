@@ -7,21 +7,24 @@
     </div>
 </div>
 
+<form action="{{ url_for("TwitterService")}}" method="post">
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Elige el twitter de quien quieres ver</label>
+    <select class="form-control" name = "username" id="exampleFormControlSelect1">
+      {% for item in data %}
+        <option value = "{{item[0]}}">{{item[0]}}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <button name="" id="" class="btn btn-secondary" type="submit" role="button">Enviar</button>
+  </div>
+</form>
 
-    <form>
-        
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Elige el twitter de quien quieres ver</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            {% for item in data %}
-              <option>{{item[0]}}</option>
-            {% endfor %}
-          </select>
-          <br>
-          <a name="" id="" class="btn btn-secondary" type="submit" role="button">Enviar</a>
-        </div>
-    
-      </form>
+<form action="{{ url_for("CSVService")}}" method="post">
+  <div class="form-group">
+    <button name="" id="" class="btn btn-secondary" type="submit" role="button">Generar CSV</button>
+  </div>
+</form>
 
 
 {% endblock %}
