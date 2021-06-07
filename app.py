@@ -17,6 +17,7 @@ def UsuarioService():
     data = cur.fetchall()
     mysql.connection.commit()
     cur.close()
+    
     return render_template('UsuarioService.html', data=data)
 
 @app.route("/twitter", methods=['GET', 'POST'])
