@@ -12,11 +12,9 @@
         <div class="form-group">
           <label for="exampleFormControlSelect1">Elige el twitter de quien quieres ver</label>
           <select class="form-control" id="exampleFormControlSelect1">
-            <option>Justin Bieber</option>
-            <option>Chris Evans</option>
-            <option>Juan</option>
-            <option>Edgar</option>
-            <option>Emi</option>
+            {% for item in data %}
+              <option>{{item[0]}}</option>
+            {% endfor %}
           </select>
         </div>
     
