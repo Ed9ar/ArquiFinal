@@ -5,7 +5,24 @@
 <form action="{{ url_for("UsuarioService")}}" method="post">
     <button name="" id="" class="btn btn-secondary" type="submit" role="button">Atrás</button>  
 </form>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Contenido</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in tweets %}
+            <tr>
+                <td scope="row">{{item.id}}</td>
+                <td>{{item.created_at}}</td>
+                <td>{{item.full_text}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 
 

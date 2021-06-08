@@ -12,8 +12,8 @@ import csv
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_USER'] = 'comicwire_admin'
+app.config['MYSQL_PASSWORD'] = 'AdminPassComicwire1234'
 app.config['MYSQL_DB'] = 'users_twitters'
 
 customer_key ='zzoPfSa0AhnSs2vtwpAShVj3P'
@@ -40,31 +40,22 @@ def UsuarioService():
 
 @app.route("/twitter", methods=['GET', 'POST'])
 def TwitterService():
-    if request.method == "POST":
-        # getting input with name = fname in HTML form
-        username = request.form.get("username")
-        # getting input with name = lname in HTML form 
-        twitter = username
-    #print("OIHOIHSIOAHOISHIOAH")
+  
+
     u = request.form.get("username")
     u = u.replace('@', '')
     
-    print(u)
     tweets = api.user_timeline(screen_name=u, 
                            # 200 is the maximum allowed count
-                           count=200,
+                           count=10,
                            include_rts = False,
                            # Necessary to keep full_text 
                            # otherwise only the first 140 words are extracted
                            tweet_mode = 'extended'
                            )
-    for info in tweets[:3]:
-        print("ID: {}".format(info.id))
-        print(info.created_at)
-        print(info.full_text)
-        print("\n")
-    #print(tweets)
-    return render_template('TwitterService.html', twitter=twitter)
+    
+  
+    return render_template('TwitterService.html', tweets=tweets)
 
 
 

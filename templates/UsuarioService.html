@@ -22,11 +22,6 @@
 
 <form action="{{ url_for('CSVService')}}" method="post">
   <div class="form-group">
-    <select class="form-control" name = "username" id="exampleFormControlSelect1">
-      {% for item in data %}
-        <option value = "{{item[0]}}">{{item[0]}}</option>
-      {% endfor %}
-    </select>
     <button name="" id="" class="btn btn-secondary" type="submit" role="button">Generar CSV</button>
   </div>
 </form>
