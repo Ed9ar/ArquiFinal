@@ -13,15 +13,15 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Edgar1213'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'users_twitters'
 
 customer_key ='zzoPfSa0AhnSs2vtwpAShVj3P'
 customer_secret ='fZ3C0wGgAPcGvnt5N7kO3SOEFEId8Oow2wjUk4tvNRtiefHnuF'
 acces_token ='4871223373-HebkdIDGlwAXM2U6AS6vP7ZUjT212kvJPrHBEyO'
 access_token_secret ='CRbXHDCCSIfrqyHRiH3VGoTzO5vEV8ATzCGxnL7Y58vvx'
-auth = OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = OAuthHandler(customer_key, customer_secret)
+auth.set_access_token(acces_token, access_token_secret)
 api = tweepy.API(auth)
 
 
@@ -45,9 +45,11 @@ def TwitterService():
         username = request.form.get("username")
         # getting input with name = lname in HTML form 
         twitter = username
-    print("OIHOIHSIOAHOISHIOAH")
+    #print("OIHOIHSIOAHOISHIOAH")
     u = request.form.get("username")
     u = u.replace('@', '')
+    
+    print(u)
     tweets = api.user_timeline(screen_name=u, 
                            # 200 is the maximum allowed count
                            count=200,
@@ -56,7 +58,12 @@ def TwitterService():
                            # otherwise only the first 140 words are extracted
                            tweet_mode = 'extended'
                            )
-    print(tweets)
+    for info in tweets[:3]:
+        print("ID: {}".format(info.id))
+        print(info.created_at)
+        print(info.full_text)
+        print("\n")
+    #print(tweets)
     return render_template('TwitterService.html', twitter=twitter)
 
 
