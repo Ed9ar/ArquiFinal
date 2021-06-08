@@ -12,8 +12,8 @@ import csv
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'comicwire_admin'
-app.config['MYSQL_PASSWORD'] = 'AdminPassComicwire1234'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'users_twitters'
 
 customer_key ='zzoPfSa0AhnSs2vtwpAShVj3P'
