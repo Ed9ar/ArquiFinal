@@ -5,7 +5,8 @@ import streamlit as st
 import base64
 import tweepy
 from tweepy import OAuthHandler
-
+import json
+from flask import jsonify
 from io import StringIO
 import csv
 
@@ -22,7 +23,7 @@ acces_token ='4871223373-HebkdIDGlwAXM2U6AS6vP7ZUjT212kvJPrHBEyO'
 access_token_secret ='CRbXHDCCSIfrqyHRiH3VGoTzO5vEV8ATzCGxnL7Y58vvx'
 auth = OAuthHandler(customer_key, customer_secret)
 auth.set_access_token(acces_token, access_token_secret)
-api = tweepy.API(auth)
+api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 
 mysql = MySQL(app)
@@ -41,10 +42,9 @@ def UsuarioService():
 @app.route("/twitter", methods=['GET', 'POST'])
 def TwitterService():
   
-
     u = request.form.get("username")
     u = u.replace('@', '')
-    
+    print("HOLA")  
     tweets = api.user_timeline(screen_name=u, 
                            # 200 is the maximum allowed count
                            count=10,
@@ -54,8 +54,10 @@ def TwitterService():
                            tweet_mode = 'extended'
                            )
     
-  
-    return render_template('TwitterService.html', tweets=tweets)
+
+    print(tweets)
+    #data = json.loads(str(tweets))
+    return  str(tweets)
 
 
 
