@@ -3,6 +3,9 @@ from flask_mysqldb import MySQL
 import pandas as pd
 import streamlit as st
 import base64
+import tweepy
+from tweepy import OAuthHandler
+
 from io import StringIO
 import csv
 
@@ -10,8 +13,17 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = 'Edgar1213'
 app.config['MYSQL_DB'] = 'users_twitters'
+
+customer_key ='zzoPfSa0AhnSs2vtwpAShVj3P'
+customer_secret ='fZ3C0wGgAPcGvnt5N7kO3SOEFEId8Oow2wjUk4tvNRtiefHnuF'
+acces_token ='4871223373-HebkdIDGlwAXM2U6AS6vP7ZUjT212kvJPrHBEyO'
+access_token_secret ='CRbXHDCCSIfrqyHRiH3VGoTzO5vEV8ATzCGxnL7Y58vvx'
+auth = OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+
 
 mysql = MySQL(app)
 
@@ -33,8 +45,18 @@ def TwitterService():
         username = request.form.get("username")
         # getting input with name = lname in HTML form 
         twitter = username
-        
-    print(request.form.get("username"))
+    print("OIHOIHSIOAHOISHIOAH")
+    u = request.form.get("username")
+    u = u.replace('@', '')
+    tweets = api.user_timeline(screen_name=u, 
+                           # 200 is the maximum allowed count
+                           count=200,
+                           include_rts = False,
+                           # Necessary to keep full_text 
+                           # otherwise only the first 140 words are extracted
+                           tweet_mode = 'extended'
+                           )
+    print(tweets)
     return render_template('TwitterService.html', twitter=twitter)
 
 
