@@ -12,7 +12,7 @@
     <label for="exampleFormControlSelect1">Elige el twitter de quien quieres ver</label>
     <select class="form-control" name = "username" id="exampleFormControlSelect1">
       {% for item in data %}
-        <option value = "{{item[0]}}">{{item[0]}}</option>
+        <option value = "{{item[0]}}">{{item}}</option>
       {% endfor %}
     </select>
     <br>

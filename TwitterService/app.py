@@ -1,6 +1,5 @@
 
 from flask import Flask, render_template, request,make_response
-from flask_mysqldb import MySQL
 import tweepy
 from tweepy import OAuthHandler
 import json
@@ -32,4 +31,4 @@ def tweet():
     return str(json_str)
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=8000, debug=True)   
+   app.run(host='0.0.0.0')  

@@ -13,15 +13,12 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def csv():
-    user = request.args.get('username')
+    user = str(request.args.get('username'))
     stringRequest = requests.get("http://127.0.0.1:8000/?username="+user)
     tweets = json.loads(str(stringRequest.text))
     t = []
     for tweet in tweets:
         t.append([tweet["id"], tweet["created_at"], tweet["full_text"]])
-
-    
-    #print(t)
 
     tweetsCsv = pd.DataFrame(t, columns=['Id', 'CreatedAt', 'Tweet'])
     new_column_names = ['Id_Name', 'CreatedAt_Name', 'Tweet_Name']
@@ -32,4 +29,4 @@ def csv():
     return resp
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=8001, debug=True)   
+   app.run(host='0.0.0.0')  
