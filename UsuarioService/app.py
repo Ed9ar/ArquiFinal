@@ -12,8 +12,8 @@ import requests
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_USER'] = 'comicwire_admin'
+app.config['MYSQL_PASSWORD'] = 'AdminPassComicwire1234'
 app.config['MYSQL_DB'] = 'users_twitters'
 
 
@@ -47,26 +47,14 @@ def TwitterService():
 
 @app.route("/csv", methods=['GET', 'POST'])
 def CSVService():
-
-    user = request.form.get("username")
-    stringRequest = requests.get("http://127.0.0.1:8000/?username="+user)
-    tweets = json.loads(str(stringRequest.text))
-    t = []
-    for tweet in tweets:
-        t.append([tweet["id"], tweet["created_at"], tweet["full_text"]])
-
+    u = request.form.get("username")
+    u = u.replace('@', '')
     
-    #print(t)
+    stringRequest = requests.get("http://127.0.0.1:8001/?username="+u)
+    print("HOLA")
+    print(stringRequest.text)
 
-    tweetsCsv = pd.DataFrame(t, columns=['Id', 'CreatedAt', 'Tweet'])
-    new_column_names = ['Id_Name', 'CreatedAt_Name', 'Tweet_Name']
-    resp = make_response(tweetsCsv.to_csv())
-    resp.headers["Content-Disposition"] = "attachment; filename=tweets.csv"
-    resp.headers["Content-Type"] = "text/csv"
-    print(tweetsCsv)
-    print(request.form['username'])
-    return resp
-    #return UsuarioService()
+    return UsuarioService()
 
 
 if __name__ == '__main__':
