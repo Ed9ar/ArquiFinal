@@ -2,9 +2,23 @@
 
 {% block content %}
 <br>
-<form action="{{ url_for("UsuarioService")}}" method="post">
-    <button name="" id="" class="btn btn-secondary" type="submit" role="button">Atrás</button>  
-</form>
+<div class="row">
+<div class="col">
+    <form action="{{ url_for("UsuarioService")}}" method="post">
+        <button name="" id="" class="btn btn-secondary" type="submit" role="button">Atrás</button>  
+    </form>
+</div>
+<div class="col d-flex flex-row-reverse">
+    <form action="{{ url_for('CSVService')}}" method="post">
+        <div class="form-group">
+            <input name="username" value='{{ u }}' class="d-none">
+        <button name="" id="" class="btn btn-secondary" type="submit" role="button">Generar CSV</button>
+        </div>
+    </form>
+</div>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
