@@ -5,5 +5,4 @@ WORKDIR /CsvService
 ADD . /CsvService/
 RUN pip install -r requirements.txt
 
-EXPOSE 8001
 CMD ["python", "/CsvService/app.py"]

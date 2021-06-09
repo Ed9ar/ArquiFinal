@@ -57,13 +57,23 @@ def TwitterService():
 @app.route("/csv", methods=['GET', 'POST'])
 def CSVService():
     u = request.form.get("username")
-    u = u.replace('@', '')
     
-    stringRequest = requests.get("http://127.0.0.1:8001/?username="+u)
-    print("HOLA")
-    print(stringRequest.text)
+    stringRequest = requests.get("http://10.1.0.39:5000/?username="+u)
+    tweets = json.loads(str(stringRequest.text))
+    print("Esto es string request" , tweets)
+    
+    t = []
+    for tweet in tweets:
+        t.append([tweet["id"], tweet["created_at"], tweet["full_text"]])
 
-    return UsuarioService()
+
+    tweetsCsv = pd.DataFrame(t, columns=['Id', 'CreatedAt', 'Tweet'])
+    new_column_names = ['Id_Name', 'CreatedAt_Name', 'Tweet_Name']
+    resp = make_response(tweetsCsv.to_csv())
+    resp.headers["Content-Disposition"] = "attachment; filename=tweets.csv"
+    resp.headers["Content-Type"] = "text/csv"
+    print(tweetsCsv)
+    return resp
 
 
 if __name__ == '__main__':
