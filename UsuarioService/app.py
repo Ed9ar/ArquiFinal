@@ -48,7 +48,6 @@ def TwitterService():
 @app.route("/csv", methods=['GET', 'POST'])
 def CSVService():
     u = request.form.get("username")
-    #u = u.replace('@', '')
     
     stringRequest = requests.get("http://127.0.0.1:8001/?username="+u)
     tweets = json.loads(str(stringRequest.text))
@@ -58,8 +57,6 @@ def CSVService():
     for tweet in tweets:
         t.append([tweet["id"], tweet["created_at"], tweet["full_text"]])
 
-    
-    #print(t)
 
     tweetsCsv = pd.DataFrame(t, columns=['Id', 'CreatedAt', 'Tweet'])
     new_column_names = ['Id_Name', 'CreatedAt_Name', 'Tweet_Name']
@@ -68,11 +65,6 @@ def CSVService():
     resp.headers["Content-Type"] = "text/csv"
     print(tweetsCsv)
     return resp
-    '''
-    print("HOLA")
-    #print(stringRequest.text)
-
-    return "Hola"'''
 
 
 if __name__ == '__main__':

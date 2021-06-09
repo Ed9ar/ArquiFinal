@@ -18,23 +18,7 @@ def csv():
     stringRequest = requests.get("http://127.0.0.1:8000/?username="+user)
     tweets = json.loads(str(stringRequest.text))
     return str(stringRequest.text)
-    '''
-    return "Hola"'''
-    '''
-    t = []
-    for tweet in tweets:
-        t.append([tweet["id"], tweet["created_at"], tweet["full_text"]])
 
-    
-    #print(t)
-
-    tweetsCsv = pd.DataFrame(t, columns=['Id', 'CreatedAt', 'Tweet'])
-    new_column_names = ['Id_Name', 'CreatedAt_Name', 'Tweet_Name']
-    resp = make_response(tweetsCsv.to_csv())
-    resp.headers["Content-Disposition"] = "attachment; filename=tweets.csv"
-    resp.headers["Content-Type"] = "text/csv"
-    print(tweetsCsv)
-    return resp'''
 
 if __name__ == '__main__':
     app.run(host="localhost", port=8001, debug=True)   
