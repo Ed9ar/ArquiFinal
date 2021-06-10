@@ -1,0 +1,43 @@
+{% extends 'layout.html' %} 
+
+{% block content %}
+<br>
+<div class="row">
+<div class="col">
+    <form action="{{ url_for("UsuarioService")}}" method="post">
+        <button name="" id="" class="btn btn-secondary" type="submit" role="button">Atrás</button>  
+    </form>
+</div>
+<div class="col d-flex flex-row-reverse">
+    <form action="{{ url_for('CSVService')}}" method="post">
+        <div class="form-group">
+            <input name="username" value='{{ u }}' class="d-none">
+        <button name="" id="" class="btn btn-secondary" type="submit" role="button">Generar CSV</button>
+        </div>
+    </form>
+</div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Contenido</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in tweets %}
+            <tr>
+                <td scope="row">{{item.id}}</td>
+                <td>{{item.created_at}}</td>
+                <td>{{item.full_text}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}

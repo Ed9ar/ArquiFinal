@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: csv-python-service
+spec:
+  selector:
+    app: csv-service
+  ports:
+  - protocol: "TCP"
+    port: 8002
+    targetPort: 5000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csv-service
+spec:
+  selector:
+    matchLabels:
+      app: csv-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: csv-service
+    spec:
+      containers:
+      - name: csv-service
+        image: csv-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8002
+      

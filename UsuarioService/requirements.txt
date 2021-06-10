@@ -1,0 +1,6 @@
+Flask
+flask-mysqldb
+pandas
+streamlit
+tweepy
+firebase_admin
